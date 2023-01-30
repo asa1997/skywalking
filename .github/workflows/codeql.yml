@@ -47,6 +47,8 @@ jobs:
     - uses: actions/setup-java@v1
       with:
           java-version: 8
+    - run: java -version
+
     - name: 'Install & Test'
       run: |
           export MAVEN_OPTS='-XX:+TieredCompilation -XX:TieredStopAtLevel=1 -XX:+CMSClassUnloadingEnabled -XX:+UseConcMarkSweepGC -XX:-UseGCOverheadLimit -Xmx3g'
@@ -81,7 +83,6 @@ jobs:
     # - run: |
     #     echo "Run, Build Application using script"
     #     ./location_of_script_within_repo/buildscript.sh
-    - run: java -version
     - run: ./mvnw -q -Dmaven.test.skip=true clean install || ./mvnw -q -Dmaven.test.skip=true clean install
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v2
